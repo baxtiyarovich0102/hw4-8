@@ -1,27 +1,38 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs';
+import path from 'path';
 
-let getUsers = () => {
-    let datas = fs.readFileSync(path.join(process.cwd(), "database", 'users.json'))
-    datas = datas ? JSON.parse(datas) : []
+const dbPath = path.join(process.cwd(), 'database', 'users.json');
 
-    return datas
-}
+const getUsers = () => {
+    try {
+        const data = fs.readFileSync(dbPath, 'utf-8');
+        return data ? JSON.parse(data) : [];
+    } catch (error) {
+        console.error('Error reading users.json:', error);
+        return [];
+    }
+};
 
-let adData = function(data){
-    let datas = getUsers()
-    
-    data.userId = datas ? datas[datas.length - 1].userId + 1 : 1
-    datas.push(data)
-    fs.writeFileSync(path.join(process.cwd(), "database", 'users.json'), JSON.stringify(datas, null, 4), 'utf-8')
-}
 
-let writeData = (datas) => {
-    fs.writeFileSync(path.join(process.cwd(), "database", 'users.json'), JSON.stringify(datas, null, 4), 'utf-8')
-}
+const addUser = (user) => {
+    const users = getUsers();
+    user.userId = users.length ? users.length + 1 : 1;
+    users.push(user);
+    saveUsers(users);
+};
+
+
+const saveUsers = (users) => {
+    try {
+        fs.writeFileSync(dbPath, JSON.stringify(users, null, 4), 'utf-8');
+    } catch (error) {
+        console.error('Error writing to users.json:', error);
+    }
+};
+
 
 export default {
     getUsers,
-    adData,
-    writeData,
-}
+    addUser,
+    saveUsers,
+};  

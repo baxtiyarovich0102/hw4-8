@@ -1,9 +1,10 @@
-Router
-    routerlar faylida qaysi routerga qanaqa so'rovlar kelsa shu so'rovlarni qabul qilib oladi va controllerga yo'naltirvoradi
 
-Controller
-    controllerlar routerga kegan so'rovlarga oid vazifalarni bajarish funksiyasini bajaradi va u funksiya export qilinib router faylida qabul qilib
-    so'rov oldida chaqirib qo'yiladi
+Express.js-da Router va Controller larni alohida fayllarga bolishning asosiy sababi kodni tartibli va oson boshqariladigan qilish.
 
-Cors (Cross-Origin Resource Sharing) — bu brauzer xavfsizlik mexanizmi bo'lib, bir domen (masalan, siteA.com) boshqa 
-    domen (masalan, siteB.com) resurslariga (masalan, API ma'lumotlari yoki rasmlar) murojaat qilganda, buni boshqaradi.
+Router - faqat yo'nalishlarni aniqlaydi va qaysi so'rov qaysi controllerga borishini belgilaydi.
+
+Controller - malumotlarni olish ,qo'shish, o'zgartirish va o'chirish larni bajaradi
+
+
+
+Cors - xavfsizlik mexanizmi hisoblanadi. U orqali domendan boshqa domenga so'rov yuborishga ruxsat beriladi yoki cheklanadi
